@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
         <Container>
-            <Main>
+            <MainContainer>
                 <LogoContainer>
-                    <h2><a href="">JustBuyIt</a></h2>
+                    <h2><Link to="/">JustBuyIt</Link></h2>
                 </LogoContainer>
                 <SearchContainer>
                     <SearchInput>
@@ -18,26 +21,23 @@ function Header() {
                 </SearchContainer>
                 <SubContainer>
                     <CartContainer>
-                        <a href="">Cart</a>
+                        <Link to=""><ShoppingCartIcon />Cart</Link>
                     </CartContainer>
                     <UserContainer>
-                        <a href="">Login</a>
+                        <Link to=""><AccountCircleIcon />Login</Link>
                     </UserContainer>
                 </SubContainer>
-            </Main>
+            </MainContainer>
         </Container>
     )
 }
 
 export default Header
 
-const Container = styled.div`
-    background: #3F0E40;
-    display: flex;
-    min-width: 100%;
+const Container = styled.div `
 `
-const Main = styled.div`
-    width: 100%;
+
+const MainContainer = styled.div`
     display: flex;
     justify-content: space-between;
 `
