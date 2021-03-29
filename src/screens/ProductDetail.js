@@ -1,12 +1,21 @@
 import { Button, Col, Container, Image, ListGroup, Row } from 'react-bootstrap'
-import React from 'react'
+import {React, useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import products from '../products'
-import Ratings from '../components/Ratings'
+import Ratings from "../components/Ratings"
 import styled from 'styled-components'
+import axios from 'axios'
 
 function ProductDetail({ match }) {
-    const prod = products.find((p) => p._id === match.params.id)
+    const [product, setProduct] = useState([])
+
+    useEffect(() => {
+        async function fetchProduct() {
+            const { data } = await axios.get(`/products/${match.params.id}`)
+            setProduct(data)
+        }
+
+        fetchProduct()
+    }, [match.params.id])
     return (
         <Container>
             <Row>
@@ -15,29 +24,29 @@ function ProductDetail({ match }) {
             <ProductDetailContainer>
             <Row>
                 <Col sm={6}>
-                    <Image src={prod.image} alt={prod.name} fluid />
+                    <Image src={product.image} alt={product.name} fluid />
                 </Col>
                 <Col sm={3}>
                     <ListGroup>
                         <ListGroup.Item>
-                            <h3>{prod.name}</h3>
+                            <h3>{product.name}</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Ratings rating={prod.rating} reviews={prod.numReviews} />
+                            <Ratings ratings={product.rating} reviews={product.numReviews} />
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <p>{prod.description}</p>
+                            <p>{product.description}</p>
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
                 <Col sm={3}>
                     <ListGroup>
                         <ListGroup.Item>
-                            <strong>Price: {prod.price}</strong>
+                            <strong>Price: &#8377; {product.price}</strong>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <strong>
-                                Status: {prod.countInStock>0 ? 'In Stock' : 'Out of stock!!'}
+                                Status: {product.countInStock>0 ? 'In Stock' : 'Out of stock!!'}
                             </strong>
                         </ListGroup.Item>
                         <ListGroup.Item>

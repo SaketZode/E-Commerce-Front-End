@@ -2,14 +2,13 @@ import axios from 'axios'
 import { React, useState, useEffect } from 'react'
 import { Col, Row, Container } from 'react-bootstrap'
 import Product from '../components/Product'
-import products from '../products'
 
 function ProductList() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         async function fetchProducts() {
-            const { data } = await axios.get('http://127.0.0.1:8000/products')
+            const { data } = await axios.get(`/products`)
             setProducts(data)
         }
 

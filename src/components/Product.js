@@ -78,7 +78,7 @@ function Product({ product }) {
           <strong>Price: &#8377; {product.price}</strong>
         </PriceDiv>
         <RatingDiv>
-            <Ratings rating={product.rating} reviews={product.numReviews}/>
+            <Ratings ratings={product.rating} reviews={product.numReviews}/>
         </RatingDiv>
       </CardContent>
 
@@ -114,10 +114,6 @@ export default Product;
 
 const PriceDiv = styled.div`
   text-align: center;
-`;
-
-const CardHeaderContainer = styled.div`
-  max-height: 50px;
 `
 
 const RatingDiv = styled.div `
