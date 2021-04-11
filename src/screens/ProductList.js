@@ -13,7 +13,7 @@ function ProductList() {
     
     useEffect(() => {
         dispatch(listProducts())
-    }, [])
+    }, [dispatch])
 
     return (
         <Container>

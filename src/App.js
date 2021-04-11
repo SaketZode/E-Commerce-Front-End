@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import ProductList from "./screens/ProductList";
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import ProductDetail from "./screens/ProductDetail";
+import Cart from "./screens/Cart";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <MainBody>
           <Route path='/' exact component={ ProductList } />
           <Route path='/productdetail/:id' component={ ProductDetail } />
+          <Route path='/cart/:id?' component={ Cart } />
         </MainBody>
         <FooterBody>
           <Footer />

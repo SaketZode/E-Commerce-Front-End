@@ -21,7 +21,7 @@ function Header() {
                 </SearchContainer>
                 <SubContainer>
                     <CartContainer>
-                        <Link to=""><ShoppingCartIcon />Cart</Link>
+                        <Link to="/cart"><ShoppingCartIcon />Cart</Link>
                     </CartContainer>
                     <UserContainer>
                         <Link to=""><AccountCircleIcon />Login</Link>
