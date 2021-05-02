@@ -6,6 +6,9 @@ import ProductList from "./screens/ProductList";
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import ProductDetail from "./screens/ProductDetail";
 import Cart from "./screens/Cart";
+import LoginForm from "./screens/LoginForm";
+import RegisterForm from "./screens/RegisterForm";
+import ProfileScreen from "./screens/ProfileScreen"
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path='/' exact component={ ProductList } />
           <Route path='/productdetail/:id' component={ ProductDetail } />
           <Route path='/cart/:id?' component={ Cart } />
+          <Route path='/login' component={LoginForm} />
+          <Route path='/register' component={RegisterForm} />
+          <Route path='/profile' component={ProfileScreen} />
         </MainBody>
         <FooterBody>
           <Footer />

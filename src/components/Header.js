@@ -1,10 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
+import { Nav, NavDropdown } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserLogoutAction } from '../actions/UserActions';
 
 function Header() {
+    const userReducer = useSelector(state => state.userReducer)
+    const userInfo = userReducer.user
+    const dispatch = useDispatch()
+
+    const logoutHandler = () => {
+        dispatch(UserLogoutAction())
+    }
+
     return (
         <Container>
             <MainContainer>
@@ -24,7 +35,20 @@ function Header() {
                         <Link to="/cart"><ShoppingCartIcon />Cart</Link>
                     </CartContainer>
                     <UserContainer>
-                        <Link to=""><AccountCircleIcon />Login</Link>
+                        <AccountBoxIcon />
+                        {  
+                            userInfo ? (
+                                <NavDropdown title={userInfo.username}>
+                                    <NavDropdown.Item>
+                                        <Link to="/profile">Profile</Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={logoutHandler}>
+                                        Logout
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            ) :
+                            <Link to="/login">Login</Link>
+                        }   
                     </UserContainer>
                 </SubContainer>
             </MainContainer>
@@ -47,6 +71,10 @@ const LogoContainer = styled.div `
     a {
         text-decoration: none;
         color: white;
+    }
+    select {
+        margin: 0px;
+        padding: 0px;
     }
     margin: 0px;
     padding: 0px 10px;
@@ -79,9 +107,10 @@ const SearchButton = styled.div `
 
 const UserContainer = styled.div `
     display: flex;
+    color: white;
     a {
         text-decoration: none;
-        color: white
+        color: white;
     }
     padding: 0px 10px;
     margin: 0px 10px;

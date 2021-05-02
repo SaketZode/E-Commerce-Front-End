@@ -3,13 +3,12 @@ import { Spinner } from 'react-bootstrap'
 
 function Loader() {
     return (
-        <Spinner animation = 'border' role = 'status' style={{
+        <Spinner animation = 'grow' variant='dark' role = 'status' style={{
             height: '100px',
             width: '100px',
             display: 'block',
             margin: 'auto'
         }}>
-            <span className='sr-only'>Loading...</span>
         </Spinner>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Col, Container, Form, Image, ListGroup, Row } from 'react-bootstrap'
+import { Alert, Button, Col, Container, Form, Image, ListGroup, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addToCart, removeFromCart } from '../actions/CartActions'
@@ -45,7 +45,7 @@ function Cart({match, location, history}) {
                             {
                                 cartItems.length === 0 ? 
                                 <Message variant='info'>
-                                    Woww!! So empty '_'  <Link to='/' style={{'text-decoration': 'none'}}>GO BACK</Link>
+                                    Woww!! So empty '_'<br/><Alert.Link href='/'>GO BACK</Alert.Link>
                                 </Message> :
                                 (
                                     <ListGroup variant='flush'>
