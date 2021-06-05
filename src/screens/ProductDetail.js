@@ -35,7 +35,7 @@ function ProductDetail({ match, history }) {
                     :
                     <Row>
                         <Col sm={6}>
-                            <Image src={product.image} alt={product.name} fluid />
+                            <Image src={product.image} alt={product.name} fluid style={{'border-radius': '10px'}}/>
                         </Col>
                         <Col sm={3}>
                             <ListGroup>

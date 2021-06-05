@@ -26,6 +26,11 @@ function Cart({match, location, history}) {
         dispatch(removeFromCart(id))
     }
 
+    const handleCheckout = (e) => {
+        e.preventDefault()
+        history.push('/login?redirect=shipping')
+    }
+
     return (
         <Container>
             <h1>SHOPPING CART</h1>
@@ -106,7 +111,7 @@ function Cart({match, location, history}) {
                                     <strong>&#8377; {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)}</strong>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    <Button className='btn-block' disabled={cartItems.length === 0}>
+                                    <Button className='btn-block' disabled={cartItems.length === 0} onClick={handleCheckout}>
                                         PROCEED TO CHECKOUT
                                     </Button>
                                 </ListGroup.Item>

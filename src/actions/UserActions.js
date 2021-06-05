@@ -18,7 +18,6 @@ import {
 
 
 export const UserLoginAction = (username, password) => async (dispatch) => {
-    console.log('user login action')
     try {
         dispatch({
             type: USER_LOGIN_REQUEST

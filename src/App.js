@@ -9,6 +9,8 @@ import Cart from "./screens/Cart";
 import LoginForm from "./screens/LoginForm";
 import RegisterForm from "./screens/RegisterForm";
 import ProfileScreen from "./screens/ProfileScreen"
+import { CheckoutScreen } from "./screens/CheckoutScreen";
+import OrderDetails from "./screens/OrderDetails";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path='/login' component={LoginForm} />
           <Route path='/register' component={RegisterForm} />
           <Route path='/profile' component={ProfileScreen} />
+          <Route path='/shipping' component={CheckoutScreen} />
+          <Route path='/orderdetails/:id' component={OrderDetails} />
         </MainBody>
         <FooterBody>
           <Footer />

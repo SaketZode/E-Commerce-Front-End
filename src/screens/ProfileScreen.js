@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Button, Col, Form, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { getOrderHistory } from '../actions/OrderActions'
 import { UserProfileAction, UpdateUserProfileAction } from '../actions/UserActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { ORDER_HISTORY_RESET } from '../constants/OrderConstants'
 import { USER_PROFILE_UPDATE_RESET } from '../constants/UserConstants'
 
 function ProfileScreen({ history }) {
@@ -26,20 +28,24 @@ function ProfileScreen({ history }) {
     const userUpdateProfile = useSelector(state => state.updatedUserProfile)
     const { success } = userUpdateProfile
 
+    const orders = useSelector(state => state.orderHistory)
+    const { loading: loadingHistory, error: errorOrderHistory, orderHistory } = orders
+
     useEffect(() => {
         if (!user) {
             history.push('/login')
         } else {
-            if (success || !user || !userProfile.name) {
+            if (!user || !userProfile.name) {
                 dispatch({
                     type: USER_PROFILE_UPDATE_RESET
                 })
                 dispatch(UserProfileAction())
+                dispatch(getOrderHistory())
             } else {
                 setname(userProfile.name)
                 setusername(userProfile.username)
                 setemail(userProfile.email)
-            }
+            } 
         }
     }, [history, dispatch, userProfile, user, success])
 
@@ -147,6 +153,38 @@ function ProfileScreen({ history }) {
             <Col md={8}>
                 <h1>Orders</h1>
                 <hr />
+                {
+                    loadingHistory ? (
+                        <Loader />
+                    ) : errorOrderHistory ? (
+                        <Message variant='danger'>{errorOrderHistory}</Message>
+                    ) : (
+                        <Table striped responsive className='table'>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>Total Amount</th>
+                                    <th>Payment Status</th>
+                                    <th>Delivery Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    orderHistory.map(order => (
+                                        <tr>
+                                            <td>{order.id}</td>
+                                            <td>{order.createdAt}</td>
+                                            <td>{order.totalPrice}</td>
+                                            <td>{order.isPaid ? order.paidAt : 'Unpaid'}</td> 
+                                            <td>{order.isDelivered ? order.deliveredAt : 'To be delivered'}</td>  
+                                        </tr>
+                                    ))
+                                } 
+                            </tbody>
+                        </Table>  
+                    )
+                }
             </Col>
         </Row>
     )

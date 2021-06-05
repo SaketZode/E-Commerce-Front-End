@@ -1,16 +1,19 @@
 import {
     ADD_TO_CART,
     CART_ADD_FAIL,
+    CART_ADD_SHIPPING_ADDRESS,
     CART_REQUEST,
-    REMOVE_FROM_CART
+    REMOVE_FROM_CART,
+    CART_ADD_PAYMENT_METHOD
 } from '../constants/CartConstants'
 
-export const CartReducer = (state = { cartItems:[] }, action) => {
+export const CartReducer = (state = { cartItems: [], shippingAddress: {}, paymentMethod: null }, action) => {
     switch(action.type) {
         case CART_REQUEST:
             return {
                 loading: true,
-                cartItems: []
+                cartItems: [],
+                shippingAddress: {}
             }
 
         case ADD_TO_CART:
@@ -42,6 +45,20 @@ export const CartReducer = (state = { cartItems:[] }, action) => {
                 ...state,
                 cartItems: state.cartItems.filter(x => x.product !== action.payload),
                 loading: false
+            }
+
+        case CART_ADD_SHIPPING_ADDRESS:
+            return {
+                ...state,
+                loading: false,
+                shippingAddress: action.payload
+            }
+
+        case CART_ADD_PAYMENT_METHOD:
+            return {
+                ...state,
+                loading: false,
+                paymentMethod: action.payload
             }
         
         default:

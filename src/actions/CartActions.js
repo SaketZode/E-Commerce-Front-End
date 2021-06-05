@@ -4,7 +4,9 @@ import {
     CART_REQUEST,
     CART_ADD_FAIL,
     REMOVE_FROM_CART,
-    REMOVE_FROM_CART_FAIL
+    REMOVE_FROM_CART_FAIL,
+    CART_ADD_SHIPPING_ADDRESS,
+    CART_ADD_PAYMENT_METHOD
 } from "../constants/CartConstants"
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -58,4 +60,22 @@ export const removeFromCart = (id) => (dispatch, getState) => {
                 : error.message,
         })
     }
+}
+
+export const CheckoutAction = (shippingAddress) => async (dispatch) => {
+    dispatch({
+        type: CART_ADD_SHIPPING_ADDRESS,
+        payload: shippingAddress
+    })
+
+    localStorage.setItem('shippingAddress', JSON.stringify(shippingAddress))
+}
+
+export const AddPaymentMethod = (paymentMethod) => async (dispatch) => {
+    dispatch({
+        type: CART_ADD_PAYMENT_METHOD,
+        payload: paymentMethod
+    })
+
+    localStorage.setItem('paymentMethod', JSON.stringify(paymentMethod))
 }
