@@ -56,7 +56,7 @@ export const listProductDetails = (id) => async (dispatch) => {
 			type: PRODUCT_DETAILS_REQUEST,
 		})
 
-		const { data } = await axios.get(`/products/${id}`)
+		const { data } = await axios.get(`/products/detail/${id}`)
 
 		dispatch({
 			type: PRODUCT_DETAILS_SUCCESS,
@@ -118,7 +118,7 @@ export const UpdateProduct = (updatedProduct) => async (dispatch, getState) => {
 			},
 		}
 
-		const { data } = await axios.put(`/product/update/${updatedProduct.id}`, updatedProduct, config)
+		const { data } = await axios.put(`/products/update/${updatedProduct.id}`, updatedProduct, config)
 
 		dispatch({
 			type: PRODUCT_UPDATE_SUCCESS,
@@ -180,7 +180,7 @@ export const CreateProduct = (product) => async (dispatch, getState) => {
 			},
 		}
 
-		const { data } = await axios.post(`/product/create/`, product, config)
+		const { data } = await axios.post(`/products/create/`, product, config)
 
 		dispatch({
 			type: PRODUCT_CREATE_SUCCESS,
@@ -200,7 +200,7 @@ export const GetTopProducts = () => async (dispatch) => {
 			type: TOP_PRODUCTS_REQUEST,
 		})
 
-		const { data } = await axios.get(`/bestproducts`)
+		const { data } = await axios.get(`/products/bestproducts`)
 
 		dispatch({
 			type: TOP_PRODUCTS_SUCCESS,

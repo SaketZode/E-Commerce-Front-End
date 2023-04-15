@@ -1,7 +1,7 @@
 import { React, useEffect } from "react"
 import { Col, Row, Container, Jumbotron } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { listProducts } from "../actions/ProductListActions"
+import { GetTopProducts, listProducts } from "../actions/ProductListActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Paginate from "../components/Paginate"
@@ -19,16 +19,19 @@ function ProductList({ history }) {
 	const productList = useSelector((state) => state.productReducer)
 	const { error, loading, products, next, previous, total_pages } = productList
 
+	const topProducts = useSelector((state) => state.topProducts)
+	const { error: topProductsError, loading: topProductsLoading, products: topProd } = topProducts
+
 	useEffect(() => {
+		dispatch(GetTopProducts())
 		dispatch(listProducts(searchkey, pageNo))
 	}, [dispatch, searchkey, pageNo])
 
 	return (
 		<div>
-			<ProductCarousel />
-			<Jumbotron>
-				<h1>Products</h1>
-				<hr />
+			{(!topProd || topProd.length !== 0) && <ProductCarousel />}
+			<Jumbotron style={{ padding: 15 }}>
+				<h2>Products</h2>
 				{loading ? (
 					<Loader />
 				) : error ? (

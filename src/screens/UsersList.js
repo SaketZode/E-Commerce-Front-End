@@ -38,8 +38,7 @@ function UsersList({ history }) {
 
 	return (
 		<UserListContainer>
-			<h1>Users List</h1>
-			<hr />
+			<h2>Users List</h2>
 			{error ? (
 				<Message variant="danger">{error}</Message>
 			) : loading ? (

@@ -168,7 +168,7 @@ export const ListOrdersAction = (pageNo) => async (dispatch, getState) => {
 			},
 		}
 		/*?page=${pageNo}*/
-		const { data } = await axios.get(`/orders/?page=${pageNo}`, config)
+		const { data } = await axios.get(`/order/?page=${pageNo}`, config)
 
 		dispatch({
 			type: ORDER_LIST_SUCCESS,

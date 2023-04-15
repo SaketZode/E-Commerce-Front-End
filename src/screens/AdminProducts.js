@@ -55,7 +55,7 @@ function AdminProducts({ history }) {
 		<Container>
 			<Row>
 				<Col md={9}>
-					<h1>Products</h1>
+					<h2>Products</h2>
 				</Col>
 				<Col md={3}>
 					<Button className="btn btn-block" onClick={handleAddProduct}>
@@ -63,7 +63,6 @@ function AdminProducts({ history }) {
 					</Button>
 				</Col>
 			</Row>
-			<hr />
 			{productDeleteError && <Message variant="danger">{productDeleteError}</Message>}
 			{loading ? (
 				<Loader />

@@ -9,6 +9,7 @@ import Message from "../components/Message"
 import Paginate from "../components/Paginate"
 import { ORDER_HISTORY_RESET } from "../constants/OrderConstants"
 import { USER_PROFILE_UPDATE_RESET } from "../constants/UserConstants"
+import VisibilityIcon from "@material-ui/icons/Visibility"
 
 function ProfileScreen({ history }) {
 	const [name, setname] = useState("")
@@ -73,6 +74,10 @@ function ProfileScreen({ history }) {
 		}
 	}
 
+	const handleOrderDetails = (id) => {
+		history.push(`/orderdetails/${id}`)
+	}
+
 	return (
 		<Row>
 			<Col md={4}>
@@ -113,7 +118,7 @@ function ProfileScreen({ history }) {
 				</FormContainer>
 			</Col>
 			<Col md={8}>
-				<h1>Orders</h1>
+				<h1>Order History</h1>
 				<hr />
 				{loadingHistory ? (
 					<Loader />
@@ -121,7 +126,7 @@ function ProfileScreen({ history }) {
 					<Message variant="danger">{errorOrderHistory}</Message>
 				) : (
 					<div>
-						<Table striped responsive className="table">
+						<Table size="sm" hover striped responsive className="table">
 							<thead>
 								<tr>
 									<th>Order ID</th>
@@ -129,6 +134,7 @@ function ProfileScreen({ history }) {
 									<th>Total Amount</th>
 									<th>Payment Status</th>
 									<th>Delivery Status</th>
+									<th>View</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -139,6 +145,11 @@ function ProfileScreen({ history }) {
 										<td>{order.totalPrice}</td>
 										<td>{order.isPaid ? order.paidAt : "Unpaid"}</td>
 										<td>{order.isDelivered ? order.deliveredAt : "To be delivered"}</td>
+										<td>
+											<Button variant="primary" size="sm" onClick={(e) => handleOrderDetails(order.id)}>
+												<VisibilityIcon size="sm" />
+											</Button>
+										</td>
 									</tr>
 								))}
 							</tbody>

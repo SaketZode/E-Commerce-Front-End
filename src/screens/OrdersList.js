@@ -29,8 +29,7 @@ function OrdersList({ history }) {
 
 	return (
 		<Container>
-			<h1>ORDERS LIST</h1>
-			<hr />
+			<h2>Orders List</h2>
 
 			{loading ? (
 				<Loader />

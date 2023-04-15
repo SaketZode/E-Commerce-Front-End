@@ -211,7 +211,7 @@ function OrderDetails({ match, history }) {
 											</Button>
 										</ListGroup.Item>
 									</ListGroup>
-								) : !orderDetails.isPaid ? (
+								) : !orderDetails.isPaid && !user.isAdmin ? (
 									<ListGroup>
 										<ListGroup.Item>
 											{!window.paypal ? (
@@ -237,7 +237,7 @@ function OrderDetails({ match, history }) {
 									!orderDetails.isDelivered && (
 										<ListGroup>
 											<ListGroup.Item>
-												<Button disabled={orderDetails.isDelivered} onClick={deliverOrder} className="btn btn-block">
+												<Button disabled={orderDetails.isDelivered || !orderDetails.isPaid} onClick={deliverOrder} className="btn btn-block">
 													Deliver
 												</Button>
 											</ListGroup.Item>

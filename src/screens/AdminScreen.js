@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	content: {
 		flexGrow: 1,
-		padding: theme.spacing(3),
+		padding: 20,
 	},
 	adminIcon: {
 		justifyContent: "center",
@@ -119,8 +119,7 @@ export default function AdminScreen({ history }) {
 				</div>
 			</Drawer>
 			<main className={classes.content}>
-				<Toolbar />
-				<Jumbotron>
+				<Jumbotron style={{ padding: 10 }}>
 					<Switch>
 						<Route exact path="/admin" component={AdminHome} />
 						<Route exact path="/admin/users" component={UsersList} />
